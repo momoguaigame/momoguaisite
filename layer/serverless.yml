@@ -1,0 +1,13 @@
+org: '1259736960'
+app: mmtmgame
+stage: dev
+component: layer
+name: mmtmgame-layer
+inputs:
+  name: mmtmgame-layer
+  region: ap-chengdu
+  src:
+    src: ../node_modules
+    targetDir: /node_modules
+  runtimes:
+    - Nodejs12.16

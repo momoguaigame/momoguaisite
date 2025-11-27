@@ -1,0 +1,40 @@
+component: http
+name: http-nextjs-2-j6K-F01x
+inputs:
+  src:
+    dist: ./
+    hook: npm run build
+    exclude:
+      - .env
+  faas:
+    runtime: Nodejs12.16
+    framework: nextjs
+    name: '${name}'
+    events:
+      - http:
+          parameters:
+            netConfig:
+              enableIntranet: false
+              enableExtranet: true
+            qualifier: $DEFAULT
+            authType: NONE
+    eip: false
+    timeout: 3
+    memorySize: 512
+    tags: []
+    environments:
+      - key: STATIC_URL
+        value: 'https://mmtmgame-dev-1259736960.cos.ap-chengdu.myqcloud.com'
+    layers:
+      - name: '${output:${stage}:${app}:mmtmgame-layer.name}'
+        version: '${output:${stage}:${app}:mmtmgame-layer.version}'
+  region: ap-chengdu
+  isAutoCiDeploy: false
+  assets:
+    cos:
+      bucket: mmtmgame-dev-1259736960
+      acl:
+        permissions: public-read
+org: '1259736960'
+app: mmtmgame
+stage: dev
